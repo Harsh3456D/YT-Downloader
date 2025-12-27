@@ -45,10 +45,7 @@ def start():
         if downloadchoice == "V":
             url = input("Paste URL :: ")
             choice = input("Select Quality (1080, 720, 480, 360) :: ")
-            if not choice == 1080 or choice == 720 or choice == 480 or choice == 360:
-                return
-            else:
-                downloadVideo(url)
+            downloadVideo(url,choice)
         elif downloadchoice == 'M':
             url = input("Paste URL :: ")
             downloadmp3(url)
@@ -61,4 +58,5 @@ def start():
             return
     
 if __name__ == "__main__":
+
     start()
