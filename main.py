@@ -35,7 +35,7 @@ def downloadmp3(url):
         
 def progress_hook(d):
     if d['status'] == 'downloading':
-        print(f"Downloading: {d['_percent_str']} | Speed: {d['_speed_str']}")
+        print(f"\nDownloading: {d['_percent_str']} | Speed: {d['_speed_str']}")
 
 
 
@@ -60,3 +60,4 @@ def start():
 if __name__ == "__main__":
 
     start()
+
