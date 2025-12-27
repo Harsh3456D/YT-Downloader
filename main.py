@@ -6,6 +6,7 @@ def downloadVideo(url, resolution):
         'format' : f'bestvideo[height<={resolution}]+bestaudio/best[height<={resolution}]',
         'outtmpl' : 'downloads/%(title)s.%9(ext)s',
         'merge_output_format' : 'mp4',
+        'cookiesfrombrowser': ('chrome',),
         'progress_hooks': [progress_hook],
     }
     
@@ -35,7 +36,7 @@ def downloadmp3(url):
         
 def progress_hook(d):
     if d['status'] == 'downloading':
-        print(f"\nDownloading: {d['_percent_str']} | Speed: {d['_speed_str']}")
+        print(f"Downloading: {d['_percent_str']} | Speed: {d['_speed_str']}")
 
 
 
@@ -44,8 +45,12 @@ def start():
         downloadchoice = input("Do you want to download [V]ideo / [M]usic or [Q]uit :: ").upper()
         if downloadchoice == "V":
             url = input("Paste URL :: ")
-            choice = input("Select Quality (1080, 720, 480, 360) :: ")
-            downloadVideo(url,choice)
+            if "youtube.com" in url or "youtu.be" in url:
+                res_choice = input("Select Quality (1080, 720, 480, 360) :: ")
+                downloadVideo(url, res_choice)
+            else:
+                print("Non-YouTube link detected. Downloading best available quality...")
+                downloadVideo(url, "1080")
         elif downloadchoice == 'M':
             url = input("Paste URL :: ")
             downloadmp3(url)
@@ -58,6 +63,6 @@ def start():
             return
     
 if __name__ == "__main__":
-
     start()
+    
 
